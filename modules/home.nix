@@ -41,7 +41,7 @@
         ll = "ls -l";
         rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
         update = "cd /etc/nixos && nix flake update && git add flake.lock && sudo nixos-rebuild switch --flake .#nixos";
-        tg-ws = "cd /home/noobisbro/tg-ws-proxy && nix-shell && tg-ws-proxy";
+        tg-ws = "cd /home/noobisbro/tg-ws-proxy && nix-shell --run tg-ws-proxy";
         qtprak = "cd /home/noobisbro/qt_progs && nix-shell -p qt5.qtbase -p qtcreator --run qtcreator"; 
       };
 

@@ -5,6 +5,7 @@
     ./modules/home.nix
     ./hardware-configuration.nix
     ./modules/boot.nix
+    ./modules/battery.nix
     ./modules/networking.nix
     ./modules/audio.nix
     ./modules/desktop.nix
@@ -40,6 +41,7 @@
     enable = true;
     allowReboot = false;
   };
-
+  # В /etc/nixos/configuration.nix
+ 
   system.stateVersion = "25.05";
 }

@@ -23,7 +23,6 @@
         "mpd",
         "pulseaudio",
         "network",
-        "power-profiles-daemon",
         "cpu",
         "memory",
         "temperature",
@@ -107,12 +106,14 @@
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
-        "states": { "warning": 30, "critical": 15 },
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
         "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
+        "format-charging": "{capacity}% 󱐋 ({power:.1f}W)",
         "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+        "format-alt": "{time} {icon} ({power:.1f}W)",
         "format-icons": ["", "", "", "", ""]
     },
     "power-profiles-daemon": {

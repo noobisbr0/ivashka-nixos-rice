@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     # Разработка и компиляторы
+    wineWow64Packages.stable
     gcc
     libgcc
     gdb
@@ -65,6 +66,8 @@
     libGL
     libGLU
     gnuplot
+    steam
+    protonup-qt
 
     # Утилиты Hyprland / Wayland
     waybar
