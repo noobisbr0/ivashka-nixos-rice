@@ -23,8 +23,7 @@
       CPU_MAX_PERF_ON_BAT = 75;
 
       # Энергосбережение звука, шин и периферии от АКБ
-      SOUND_POWER_SAVE_ON_BAT = 1;
-      WIFI_PWR_ON_BAT = "on";
+      
       RUNTIME_PM_ON_BAT = "auto";
       PCIE_ASPM_ON_BAT = "powersupersave";
 
