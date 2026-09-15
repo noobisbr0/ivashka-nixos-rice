@@ -9,7 +9,7 @@
     home.username = "noobisbro";
     home.homeDirectory = "/home/noobisbro";
     home.stateVersion = "25.05";
-
+    
     programs.home-manager.enable = true;
 
     imports = [
@@ -21,7 +21,7 @@
     # Декларативный Git
     programs.git = {
       enable = true;
-      settings.user.name = "Ivan Frolov";
+      settings.user.name = "noobisbr0";
       settings.user.email = "noobisbro@ro.ru";
     };
 
@@ -41,6 +41,8 @@
         ll = "ls -l";
         rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
         update = "cd /etc/nixos && nix flake update && git add flake.lock && sudo nixos-rebuild switch --flake .#nixos";
+        tg-ws = "cd /home/noobisbro/tg-ws-proxy && nix-shell && tg-ws-proxy";
+        qtprak = "cd /home/noobisbro/qt_progs && nix-shell -p qt5.qtbase -p qtcreator --run qtcreator"; 
       };
 
       initContent = ''

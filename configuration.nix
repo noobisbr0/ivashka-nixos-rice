@@ -14,9 +14,25 @@
     ./modules/packages.nix
     ./modules/zapret.nix
   ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
 
+    # Сколько пакетов Nix может собирать или скачивать одновременно:
+    # "auto" выставляет значение равным количеству потоков CPU
+    max-jobs = "auto";
+
+    # Сколько потоков процессора выделять под компиляцию ОДНОГО пакета:
+    # 0 означает "все доступные потоки" (аналог make -j$(nproc))
+    cores = 0;
+
+    # Параллельные HTTP-соединения для ускорения скачивания из binary cache
+    http-connections = 50;
+
+    # Увеличение буфера для загрузки больших пакетов
+    download-buffer-size = 67108864; # 64 МБ
+  };
   # Экспериментальные возможности Nix и несвободные пакеты
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
   # Автообновление

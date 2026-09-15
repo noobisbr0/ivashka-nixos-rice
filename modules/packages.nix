@@ -58,6 +58,7 @@
 
     # Графика, 3D и видео
     freecad
+    orca-slicer
     blender
     freeglut
     mesa
