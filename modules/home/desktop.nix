@@ -1,5 +1,33 @@
-{ ... }:
+{ pkgs, ... }:
 
+let
+  lockIcon = pkgs.writeText "lock.svg" ''
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#d8b4fe" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    </svg>
+  '';
+
+  suspendIcon = pkgs.writeText "suspend.svg" ''
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#7aa2f7" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  '';
+
+  rebootIcon = pkgs.writeText "reboot.svg" ''
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff9e64" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 4v6h-6"></path>
+      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+    </svg>
+  '';
+
+  shutdownIcon = pkgs.writeText "shutdown.svg" ''
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#f7768e" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+      <line x1="12" y1="2" x2="12" y2="12"></line>
+    </svg>
+  '';
+in
 {
   # 1. Hyprland 0.57+ Lua Config
   xdg.configFile."hypr/hyprland.lua".text = ''
@@ -24,6 +52,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("nwg-drawer -r -c 7 -is 48 -wm hyprland")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 16")
+	hl.exec_cmd("hyprlock")
 end)
 
 hl.config({
@@ -130,7 +159,7 @@ hl.monitor({
   xdg.configFile."hypr/hyprlock.conf".text = ''
 background {
     monitor =
-    path = screenshot
+    path = /home/noobisbro/Pictures/vermeil.png
     color = rgba(25, 20, 20, 1.0)
     blur_passes = 2
     blur_size = 7
@@ -221,6 +250,105 @@ finders {
 
 ui {
     window_size = 500 300
+}
+  '';
+
+  # 6. Wleave Configuration & Dark Purple Theme
+  xdg.configFile."wleave/layout.json".text = ''
+{
+  "buttons": [
+    {
+      "label": "lock",
+      "action": "hyprlock",
+      "text": "Блокировка",
+      "keybind": "l"
+    },
+    {
+      "label": "suspend",
+      "action": "systemctl suspend",
+      "text": "Сон",
+      "keybind": "u"
+    },
+    {
+      "label": "reboot",
+      "action": "systemctl reboot",
+      "text": "Перезагрузка",
+      "keybind": "r"
+    },
+    {
+      "label": "shutdown",
+      "action": "systemctl poweroff",
+      "text": "Выключение",
+      "keybind": "s"
+    }
+  ]
+}
+  '';
+
+  xdg.configFile."wleave/style.css".text = ''
+window {
+    background-color: rgba(26, 16, 37, 0.85);
+}
+
+button {
+    color: #d8b4fe;
+    background-color: #2d1e3e;
+    border: 2px solid #4a3363;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    margin: 12px;
+    padding: 24px 30px;
+    font-family: "JetBrainsMono Nerd Font", "CaskaydiaCove Nerd Font", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-position: center 36%;
+    background-size: 64px 64px;
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+button:hover {
+    background-color: #3d2856;
+    border-color: #bb9af7;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(187, 154, 247, 0.5);
+}
+
+button:focus {
+    border-color: #d8b4fe;
+    background-color: #432b5e;
+}
+
+#lock {
+    background-image: url("${lockIcon}");
+}
+#lock:hover {
+    border-color: #bb9af7;
+    color: #bb9af7;
+}
+
+#suspend {
+    background-image: url("${suspendIcon}");
+}
+#suspend:hover {
+    border-color: #7aa2f7;
+    color: #7aa2f7;
+}
+
+#reboot {
+    background-image: url("${rebootIcon}");
+}
+#reboot:hover {
+    border-color: #ff9e64;
+    color: #ff9e64;
+}
+
+#shutdown {
+    background-image: url("${shutdownIcon}");
+}
+#shutdown:hover {
+    border-color: #f7768e;
+    color: #f7768e;
 }
   '';
 }

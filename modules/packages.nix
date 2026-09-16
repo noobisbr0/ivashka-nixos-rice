@@ -81,14 +81,14 @@
     hyprmagnifier
     hyprlauncher
     hyprutils
-    wlogout
+    wleave
     wl-clipboard
     grim
     slurp
     swappy
     wf-recorder
     cliphist
-    tuigreet
+    #tuigreet
     greetd
     xwayland
     polkit_gnome

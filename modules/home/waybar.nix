@@ -29,7 +29,8 @@
         "backlight",
         "tray",
         "battery",
-        "clock"
+        "clock",
+        "custom/power"
     ],
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -171,16 +172,9 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
     },
     "custom/power": {
-        "format" : "⏻ ",
+        "format": "⏻",
         "tooltip": false,
-        "menu": "on-click",
-        "menu-file": "$HOME/.config/waybar/power_menu.xml",
-        "menu-actions": {
-            "shutdown": "shutdown",
-            "reboot": "reboot",
-            "suspend": "systemctl suspend",
-            "hibernate": "systemctl hibernate"
-        }
+        "on-click": "wleave"
     },
     "tray": {
         "icon-size": 15,
@@ -261,6 +255,7 @@ window#waybar.top {
 #language,
 #bluetooth,
 #pulseaudio,
+#custom-power,
 #mpd,
 #tray,
 #idle_inhibitor,
