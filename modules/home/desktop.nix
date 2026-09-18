@@ -57,6 +57,7 @@ end)
 
 hl.config({
 	general = {
+	    layout = "dwindle",
 		border_size = 2,
 		gaps_in = 5,
 		gaps_out = 10,
@@ -64,6 +65,10 @@ hl.config({
 		["col.inactive_border"] = "rgb(3b0764)",
 	},
 
+    dwindle = {
+        preserve_split = true,
+    },
+    
 	input = {
 		kb_layout = "us,ru",
 		kb_options = "grp:win_space_toggle",
@@ -121,6 +126,8 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"), { re
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
+
 
 hl.bind("SUPER + 1", hl.dsp.focus({ workspace = 1 }))
 hl.bind("SUPER + 2", hl.dsp.focus({ workspace = 2 }))
@@ -143,6 +150,17 @@ hl.bind("SUPER + SHIFT + 7", hl.dsp.window.move({ workspace = 7 }))
 hl.bind("SUPER + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
 hl.bind("SUPER + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
 hl.bind("SUPER + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
+
+
+hl.bind(
+	mainMod .. " + J",
+	hl.dsp.layout("togglesplit")
+)
+
+hl.bind(mainMod .. " + CTRL + Left", hl.dsp.window.resize({ x = -80, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + Right", hl.dsp.window.resize({ x = 80, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + Up", hl.dsp.window.resize({ x = 0, y = -80, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + Down", hl.dsp.window.resize({ x = 0, y = 80, relative = true }), { repeating = true })
 
 hl.bind("SUPER + X", hl.dsp.workspace.toggle_special())
 hl.bind("SUPER + SHIFT + X", hl.dsp.window.move({ workspace = "special" }))
@@ -265,7 +283,7 @@ ui {
     },
     {
       "label": "suspend",
-      "action": "systemctl suspend",
+      "action": "systemctl  suspend",
       "text": "Сон",
       "keybind": "u"
     },

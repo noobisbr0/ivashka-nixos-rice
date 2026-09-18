@@ -88,7 +88,7 @@
     swappy
     wf-recorder
     cliphist
-    #tuigreet
+    tuigreet
     greetd
     xwayland
     polkit_gnome
@@ -142,6 +142,7 @@
 
     # Приложения
     firefox
+    chromium
     discord
     telegram-desktop
     spotify
