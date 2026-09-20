@@ -147,6 +147,8 @@
     telegram-desktop
     spotify
     vlc
+    haruna
+    qbittorrent
     pcmanfm
     xarchiver
     libreoffice-qt6-fresh
