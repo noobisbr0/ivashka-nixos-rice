@@ -250,26 +250,6 @@ wallpaper {
 splash = false
   '';
 
-  # 5. Hyprlauncher
-  xdg.configFile."hypr/hyprlauncher.conf".text = ''
-general {
-    grab_focus = true
-}
-
-cache {
-    enabled = true
-}
-
-finders {
-    default_finder = desktop
-    desktop_icons = true
-    math_prefix = =
-}
-
-ui {
-    window_size = 500 300
-}
-  '';
 
   # 6. Wleave Configuration & Dark Purple Theme
   xdg.configFile."wleave/layout.json".text = ''

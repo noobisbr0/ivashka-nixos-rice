@@ -16,6 +16,7 @@
       ./home/desktop.nix
       ./home/waybar.nix
       ./home/terminal.nix
+      ./home/launcher.nix       
     ];
 
     # Декларативный Git
