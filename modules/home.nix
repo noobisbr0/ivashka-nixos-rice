@@ -9,6 +9,11 @@
     home.username = "noobisbro";
     home.homeDirectory = "/home/noobisbro";
     home.stateVersion = "25.05";
+
+    home.sessionPath = [
+        "$HOME/.local/bin"
+    ];
+
     programs.home-manager.enable = true;
 
     imports = [
@@ -43,6 +48,7 @@
         update = "cd /etc/nixos && nix flake update && git add flake.lock && sudo nixos-rebuild switch --flake .#nixos";
         tg-ws = "cd /home/noobisbro/tg-ws-proxy && nix-shell --run tg-ws-proxy";
         qtprak = "cd /home/noobisbro/qt_progs && nix-shell -p qt5.qtbase -p qtcreator --run qtcreator"; 
+        ani-cli = "anicli-ru cli";
       };
 
       initContent = ''

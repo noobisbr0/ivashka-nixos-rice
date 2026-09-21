@@ -8,6 +8,7 @@
     libgcc
     gdb
     clang
+    uv
     clang-tools
     cpplint
     cmake
@@ -159,7 +160,6 @@
     foot
     ghostty
     prismlauncher
-    ani-cli
     yt-dlp
     amnezia-vpn
 
