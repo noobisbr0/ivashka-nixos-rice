@@ -16,6 +16,7 @@
     pkg-config
     boost
     ragel
+    deno
     pcre
     pcre2
     sqlite
