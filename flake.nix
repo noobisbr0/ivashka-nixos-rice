@@ -9,14 +9,27 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # ДОБАВЛЕНО: Подключаем ragenix
+    ragenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, zapret-discord-youtube, home-manager, ... }: {
+  outputs = { self, nixpkgs, zapret-discord-youtube, home-manager, ragenix, ... }: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         zapret-discord-youtube.nixosModules.withTestTools
         home-manager.nixosModules.home-manager
+        
+        # ДОБАВЛЕНО: Инициализация модуля и пакета ragenix
+        ragenix.nixosModules.default
+        {
+          environment.systemPackages = [ ragenix.packages.x86_64-linux.default ];
+        }
+        
         ./configuration.nix
       ];
     };

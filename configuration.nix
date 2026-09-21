@@ -14,6 +14,7 @@
     ./modules/fonts.nix
     ./modules/packages.nix
     ./modules/zapret.nix
+    ./modules/secrets.nix
   ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
