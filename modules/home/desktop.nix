@@ -38,7 +38,7 @@ in
 
 local mainMod = "SUPER"
 local terminal = "kitty"
-local fileManager = "yazi"
+local fileManager = "thunar"
 local menu = "hyprlauncher"
 
 hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")

@@ -149,6 +149,7 @@
     spotify
     vlc
     haruna
+    thunar
     qbittorrent
     pcmanfm
     xarchiver
