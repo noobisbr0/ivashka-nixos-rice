@@ -13,6 +13,21 @@
 
   gtk = {
     enable = true;
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+
+    gtk4.theme = null;
+    
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
+    
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
@@ -44,6 +59,8 @@
     }
   '';
 
+  
+
   xdg.configFile."hypr/hyprtoolkit.conf".text = ''
     rounding = 12
     font_family = JetBrainsMono Nerd Font
@@ -59,4 +76,10 @@
     text = 0xFFFFFFFF
     bright_text = 0xFFBB9AF7
   '';
+
+    dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
 }
