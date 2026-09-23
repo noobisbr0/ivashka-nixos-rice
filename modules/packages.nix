@@ -195,6 +195,5 @@
     # LaTeX
     texlive.combined.scheme-medium
     texlivePackages.xecyr
-    gummi
   ];
 }
