@@ -7,6 +7,7 @@
     gcc
     libgcc
     gdb
+    ninja
     clang
     uv
     clang-tools
@@ -167,6 +168,7 @@
 
     # Аудио / Видео / Устройства
     pavucontrol
+    audacity
     wireplumber
     libpulseaudio
     playerctl
@@ -195,7 +197,16 @@
     era
 
     # LaTeX
-    texlive.combined.scheme-medium
-    texlivePackages.xecyr
+    #texlive.combined.scheme-full 
+    #texlive.combined.scheme-medium
+    (texlive.combine {
+      inherit (texlive) 
+        scheme-medium
+        hyphen-russian
+        xecyr
+        polyglossia
+        bookmark;
+    })
+    
   ];
 }
