@@ -146,9 +146,11 @@
     firefox
     chromium
     discord
+    qimgv
     telegram-desktop
     spotify
     vlc
+    v2raya
     haruna
     thunar
     qbittorrent
