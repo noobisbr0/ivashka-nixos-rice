@@ -49,6 +49,7 @@
         tg-ws = "cd /home/noobisbro/tg-ws-proxy && nix-shell --run tg-ws-proxy";
         qtprak = "cd /home/noobisbro/qt_progs && nix-shell -p qt5.qtbase -p qtcreator --run qtcreator"; 
         ani-cli = "anicli-ru cli";
+        dns-toggle = "toggledns";
       };
 
       initContent = ''
@@ -57,6 +58,35 @@
         ZSH_HIGHLIGHT_STYLES[builtin]='fg=135,bold'
         ZSH_HIGHLIGHT_STYLES[alias]='fg=135,bold'
 
+        toggledns() {
+          local con_name=$(nmcli -t -f NAME,DEVICE connection show --active | head -n1 | cut -d: -f1)
+          local iface=$(ip route show default | awk '{print $5; exit}')
+
+          if [ -z "$con_name" ] || [ -z "$iface" ]; then
+            echo "Активное подключение не найдено."
+            return 1
+          fi
+
+          local ignore_dns=$(nmcli -g ipv4.ignore-auto-dns connection show "$con_name")
+
+          if [ "$ignore_dns" = "yes" ]; then
+            echo "Включаем DNS от роутера (DHCP)..."
+            nmcli connection modify "$con_name" ipv4.ignore-auto-dns no ipv6.ignore-auto-dns no
+            nmcli connection up "$con_name" > /dev/null
+            sudo resolvectl revert "$iface"
+          else
+            echo "Возвращаем статичный Xbox DNS (DoT)..."
+            nmcli connection modify "$con_name" ipv4.ignore-auto-dns yes ipv6.ignore-auto-dns yes
+            nmcli connection up "$con_name" > /dev/null
+            sudo resolvectl dns "$iface" 111.88.96.50#xbox-dns.ru 111.88.96.51#xbox-dns.ru
+            sudo resolvectl dnsovertls "$iface" yes
+          fi
+
+          sudo resolvectl flush-caches
+          echo "Текущий статус DNS для $iface:"
+          resolvectl status "$iface"
+        }
+        
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '';
