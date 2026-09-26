@@ -148,6 +148,10 @@
     chromium
     discord
     qimgv
+    brave
+    mihomo
+    #sparkle
+    lmstudio
     telegram-desktop
     spotify
     vlc
@@ -168,6 +172,7 @@
 
     # Аудио / Видео / Устройства
     pavucontrol
+    mpv
     audacity
     wireplumber
     libpulseaudio
