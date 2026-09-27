@@ -150,6 +150,7 @@
     qimgv
     brave
     mihomo
+    clashtui
     #sparkle
     lmstudio
     telegram-desktop
