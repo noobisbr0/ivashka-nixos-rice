@@ -41,9 +41,15 @@ let
             return 1;
         }
 
-        int lshift = 0, rshift = 0, both_active = 0;
-        int count = 0;
-        struct timeval last_press = {0, 0};
+        // Состояния для Shift
+        int lshift = 0, rshift = 0, shift_active = 0;
+        int shift_count = 0;
+        struct timeval last_shift_press = {0, 0};
+
+        // Состояния для Ctrl
+        int lctrl = 0, rctrl = 0, ctrl_active = 0;
+        int ctrl_count = 0;
+        struct timeval last_ctrl_press = {0, 0};
 
         while (1) {
             int ret = poll(fds, num_fds, -1);
@@ -55,36 +61,69 @@ let
                     while (read(fds[i].fd, &ev, sizeof(ev)) > 0) {
                         if (ev.type != EV_KEY) continue;
 
+                        // 1. Обработка Shift
                         if (ev.code == KEY_LEFTSHIFT) {
                             lshift = (ev.value >= 1);
                         } else if (ev.code == KEY_RIGHTSHIFT) {
                             rshift = (ev.value >= 1);
                         }
 
-                        if (lshift && rshift && !both_active) {
-                            both_active = 1;
+                        // 2. Обработка Ctrl
+                        if (ev.code == KEY_LEFTCTRL) {
+                            lctrl = (ev.value >= 1);
+                        } else if (ev.code == KEY_RIGHTCTRL) {
+                            rctrl = (ev.value >= 1);
+                        }
+
+                        // Логика двойного Shift (x4)
+                        if (lshift && rshift && !shift_active) {
+                            shift_active = 1;
                             struct timeval now;
                             gettimeofday(&now, NULL);
 
-                            if (count == 0 || time_diff(&now, &last_press) <= THRESHOLD_SEC) {
-                                count++;
+                            if (shift_count == 0 || time_diff(&now, &last_shift_press) <= THRESHOLD_SEC) {
+                                shift_count++;
                             } else {
-                                count = 1;
+                                shift_count = 1;
                             }
-                            last_press = now;
+                            last_shift_press = now;
 
-                            if (count == REQUIRED_PRESSES) {
-                                count = 0;
+                            if (shift_count == REQUIRED_PRESSES) {
+                                shift_count = 0;
                                 if (fork() == 0) {
-                                    // Прямой запуск от имени текущего пользователя в его сессии Hyprland
                                     system("notify-send -u normal 'Gemini' 'Открытие gemini.google.com...' && xdg-open https://gemini.google.com &");
                                     exit(0);
                                 }
                             }
                         }
-
                         if (!lshift || !rshift) {
-                            both_active = 0;
+                            shift_active = 0;
+                        }
+
+                        // Логика двойного Ctrl (x4)
+                        if (lctrl && rctrl && !ctrl_active) {
+                            ctrl_active = 1;
+                            struct timeval now;
+                            gettimeofday(&now, NULL);
+
+                            if (ctrl_count == 0 || time_diff(&now, &last_ctrl_press) <= THRESHOLD_SEC) {
+                                ctrl_count++;
+                            } else {
+                                ctrl_count = 1;
+                            }
+                            last_ctrl_press = now;
+
+                            if (ctrl_count == REQUIRED_PRESSES) {
+                                ctrl_count = 0;
+                                if (fork() == 0) {
+                                    // Открываем окно kitty, запускаем fastfetch и оставляем терминал открытым
+                                    system("kitty --title 'Fastfetch' bash -c 'fastfetch; exec bash' &");
+                                    exit(0);
+                                }
+                            }
+                        }
+                        if (!lctrl || !rctrl) {
+                            ctrl_active = 0;
                         }
                     }
                 }
@@ -97,7 +136,6 @@ in
 {
   environment.systemPackages = [ shiftListener ];
 
-  # Разрешаем пользователям доступ на чтение событий клавиатуры без root
   services.udev.extraRules = ''
     KERNEL=="event[08]", SUBSYSTEM=="input", MODE="0660", GROUP="users"
   '';

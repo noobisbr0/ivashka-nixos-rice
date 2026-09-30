@@ -37,7 +37,7 @@
   # Экспериментальные возможности Nix и несвободные пакеты
   # nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-
+  
   # Автообновление
   system.autoUpgrade = {
     enable = true;
