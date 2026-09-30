@@ -151,6 +151,7 @@
     brave
     mihomo
     clashtui
+    gimp
     #sparkle
     lmstudio
     telegram-desktop
