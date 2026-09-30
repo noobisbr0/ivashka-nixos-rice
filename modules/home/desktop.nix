@@ -234,6 +234,9 @@ input-field {
 }
   '';
 
+hl.exec_cmd("hyprctl keyword layerrule 'blur, mako'")
+hl.exec_cmd("hyprctl keyword layerrule 'ignorezero, mako'")
+
   # 3. Hypridle
   xdg.configFile."hypr/hypridle.conf".text = ''
 general {
