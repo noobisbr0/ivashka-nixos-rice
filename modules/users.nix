@@ -19,7 +19,7 @@
   users.users.noobisbro = {
     isNormalUser = true;
     description = "Ivan Frolov";
-    extraGroups = [ "networkmanager" "wheel" "docker" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "audio" "input"];
     packages = with pkgs; [ ];
   };
 }

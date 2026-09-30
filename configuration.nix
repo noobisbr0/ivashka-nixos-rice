@@ -15,6 +15,7 @@
     ./modules/packages.nix
     ./modules/zapret.nix
     ./modules/secrets.nix
+    ./modules/shift-listener.nix
   ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
