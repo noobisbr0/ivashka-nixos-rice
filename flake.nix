@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    lmstudio = {
+      url = "github:Daaboulex/lmstudio-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # ДОБАВЛЕНО: Подключаем ragenix
     ragenix = {
       url = "github:yaxitech/ragenix";
@@ -17,9 +22,10 @@
     };
   };
 
-  outputs = { self, nixpkgs, zapret-discord-youtube, home-manager, ragenix, ... }: {
+  outputs = { self, nixpkgs, zapret-discord-youtube, home-manager, ragenix, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
       modules = [
         zapret-discord-youtube.nixosModules.withTestTools
         home-manager.nixosModules.home-manager

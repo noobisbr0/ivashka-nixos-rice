@@ -6,9 +6,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Графика и OpenCL / ROCm
-  hardware.graphics.extraPackages = with pkgs; [
-    rocmPackages.clr.icd
-  ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+      rocmPackages.clr
+    ];
+  };
 
   # Bluetooth
   services.blueman.enable = true;

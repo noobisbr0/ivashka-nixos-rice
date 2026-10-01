@@ -153,7 +153,7 @@
     clashtui
     gimp
     #sparkle
-    lmstudio
+    #lmstudio
     telegram-desktop
     spotify
     vlc

@@ -27,7 +27,7 @@
     programs.git = {
       enable = true;
       settings.user.name = "noobisbr0";
-      settings.user.email = "noobisbro@ro.ru";
+      settings.user.email = "noobisbro@duck.com";
     };
 
     # Пользовательский Zsh с Powerlevel10k

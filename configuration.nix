@@ -16,6 +16,7 @@
     ./modules/zapret.nix
     ./modules/secrets.nix
     ./modules/shift-listener.nix
+    ./modules/lmstudio.nix
   ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
