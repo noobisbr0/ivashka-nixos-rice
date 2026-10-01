@@ -90,12 +90,11 @@ map alt+9 goto_tab 9
     '';
   };
 
-  # 2. Mako
-    # 2. Mako
+# 2. Mako
   services.mako = {
     enable = true;
     extraConfig = ''
-# macOS-подобное позиционирование и геометрия
+# Расположение и геометрия в духе macOS
 anchor=top-right
 layer=overlay
 sort=-time
@@ -106,16 +105,16 @@ padding=14,18
 border-radius=14
 border-size=1
 
-# Цветовая палитра: глубокий полупрозрачный фиолетовый и лавандовые акценты
-background-color=#24182de6
-text-color=#f3edfa
-border-color=#bb9af755
-progress-color=over #bb9af788
+# Прозрачность ~72% с легким фиолетовым оттенком
+background-color=#22152eb8
+text-color=#f5effc
+border-color=#d8b4fe38
+progress-color=over #bb9af770
 
-# Типографика и иконки
-font=Inter, Ubuntu Sans, HarmonyOS Sans SC 11
+# Типографика: мягкий Ubuntu Sans вместо строгого Inter
+font=Montserrat 11
 icons=1
-max-icon-size=40
+max-icon-size=38
 icon-location=left
 
 # Тайминги
@@ -123,17 +122,17 @@ default-timeout=5000
 ignore-timeout=0
 
 [urgency=low]
-border-color=#4a3363aa
-text-color=#c4b5d4
+border-color=#4a336366
+text-color=#cbbcdb
 default-timeout=3000
 
 [urgency=normal]
-border-color=#bb9af777
+border-color=#bb9af744
 text-color=#ffffff
 
 [urgency=critical]
-border-color=#f7768e
-background-color=#2e192de6
+border-color=#f7768e88
+background-color=#2d142ab8
 text-color=#ffffff
 default-timeout=0
     '';

@@ -11,6 +11,7 @@
     dejavu_fonts
     inter
     roboto
+    montserrat
     ubuntu-sans
     fira-code
     fira-code-symbols

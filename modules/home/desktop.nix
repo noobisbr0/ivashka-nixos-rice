@@ -130,6 +130,8 @@ hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
 
+hl.dsp.exec_cmd("hyprctl keyword layerrule 'blur, mako'")
+hl.dsp.exec_cmd("hyprctl keyword layerrule 'ignorezero, mako'")
 
 hl.bind("SUPER + 1", hl.dsp.focus({ workspace = 1 }))
 hl.bind("SUPER + 2", hl.dsp.focus({ workspace = 2 }))
@@ -233,9 +235,6 @@ input-field {
     valign = center
 }
   '';
-
-hl.exec_cmd("hyprctl keyword layerrule 'blur, mako'")
-hl.exec_cmd("hyprctl keyword layerrule 'ignorezero, mako'")
 
   # 3. Hypridle
   xdg.configFile."hypr/hypridle.conf".text = ''
