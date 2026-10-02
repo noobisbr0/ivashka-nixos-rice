@@ -25,7 +25,8 @@
     sqlitecpp
     tinyxml-2
     bazel_8
-    rustup
+    cargo
+    rustc
     nodejs_24
     typescript
     python313
